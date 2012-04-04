@@ -1,0 +1,76 @@
+{% load chart_tags %}
+<script src="{{MEDIA_URL}}amcharts/amcharts.js" type="text/javascript">
+</script>
+<script src="{{MEDIA_URL}}amcharts/raphael.js" type="text/javascript">
+</script>
+        <script type="text/javascript">
+		{% with chart.get_queryset as queryset %}
+        
+            var chart;
+		    
+	        var chartData = [{
+            {% for obj in queryset %}
+                {% xy_chart_obj_info chart obj forloop.counter %}
+                {% if not forloop.last %},{% endif %}
+            {% endfor %}
+            }];
+
+            AmCharts.ready(function () {
+                // XY Chart
+                chart = new AmCharts.AmXYChart();
+                chart.pathToImages = "{{MEDIA_URL}}amcharts/images/";
+                chart.dataProvider = chartData;
+                chart.startDuration = {{chart.start_duration}};
+				chart.fontFamily = "{{chart.font_family}}";
+				
+
+                // AXES				
+                // X
+                var xAxis = new AmCharts.ValueAxis();
+                xAxis.title = "{{chart.XAxis.title}}";
+                xAxis.position = "{{chart.XAxis.position}}";
+                xAxis.autoGridCount = {{chart.XAxis.auto_grid_count|yesno:'true,false'}};
+                chart.addValueAxis(xAxis);
+
+                // Y
+                var yAxis = new AmCharts.ValueAxis();
+                yAxis.title = "{{chart.YAxis.title}}";
+                yAxis.position = "{{chart.YAxis.position}}";
+                yAxis.autoGridCount = {{chart.YAxis.auto_grid_count|yesno:'true,false'}};
+                chart.addValueAxis(yAxis);
+                
+                // ZEICHNET DIE BULLETS
+                {% with chart.get_selected as selected_obj %}
+                {% for obj in queryset %}
+                    {% with forloop.counter as idx %}
+                    var graph{{idx}} = new AmCharts.AmGraph();
+                    graph{{idx}}.xField = "x{{idx}}"; // **This is connected to the data above.
+                    graph{{idx}}.yField = "y{{idx}}"; // **This is connected to the data above.
+                    graph{{idx}}.balloonText = "{{chart.bullet_text}}";				
+                    graph{{idx}}.lineAlpha = {{chart.line_alpha}};
+                    graph{{idx}}.labelText = "{{chart.bullet_text}}";
+                    {% ifequal obj selected_obj %}
+                        graph{{idx}}.bullet = "{{chart.selected_bullet_shape}}";
+                        graph{{idx}}.lineColor = "{{chart.selected_bullet_color}}";
+                        graph{{idx}}.color = "{{chart.selected_bullet_text_color}}";
+                        graph{{idx}}.bulletSize = {{chart.selected_bullet_size}};
+                    {% else %}
+                        graph{{idx}}.bullet = "{{chart.bullet_shape}}";
+                        graph{{idx}}.lineColor = "{{chart.bullet_color}}";
+                        graph{{idx}}.color = "{{chart.bullet_text_color}}";
+                        graph{{idx}}.bulletSize = {{chart.bullet_size}};
+                    {% endifequal %}
+                    chart.addGraph(graph{{idx}});
+                    {% endwith %}
+                {% endfor %}
+                {% endwith %}
+
+                // WRITE
+                chart.write("chartdiv");
+            });
+        {% endwith %}
+        </script>
+    
+	<!-- This div has to be publishable in the Django CMS somehow! -->	
+    <div id="chartdiv" style="width: {{chart.width}}px; height: {{chart.height}}px;"></div>
+
