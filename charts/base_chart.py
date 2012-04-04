@@ -8,10 +8,14 @@ class BaseChart:
     width = 600
     height = 400
     template = None
+    obj_pk = None
 
     def get_queryset(self):
         raise ImproperlyConfigured(_("Chart requires a definition of "
                                      "'get_queryset'"))
+
+    def get_object(self):
+        return None
 
     def render(self, **context):
         context['chart'] = self
