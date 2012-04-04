@@ -71,6 +71,5 @@
         {% endwith %}
         </script>
     
-	<!-- This div has to be publishable in the Django CMS somehow! -->	
-    <div id="chartdiv" style="width: {{chart.width}}px; height: {{chart.height}}px;"></div>
-
+	<!-- This div has to be publishable in the Django CMS somehow! -->
+    <div id="chartdiv" style="{% if width %}width:{{chart.width}}px; {% endif %}{% if height %}height:{{chart.height}}px;{% endif %}"></div>

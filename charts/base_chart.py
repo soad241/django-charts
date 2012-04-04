@@ -5,8 +5,8 @@ from django.conf import settings
 from django.http import HttpResponse
 
 class BaseChart:
-    width = 600
-    height = 400
+    width = None
+    height = None
     template = None
     obj_pk = None
 
