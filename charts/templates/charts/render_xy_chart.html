@@ -42,11 +42,7 @@
                 // ZEICHNET DIE BULLETS
                 {% with chart.get_selected as selected_obj %}
                 {% for obj in queryset %}
-                    {% ifequal obj selected_obj %}
-                        {% xy_chart_bullet_info chart obj forloop.counter True %}
-                    {% else %}
-                        {% xy_chart_bullet_info chart obj forloop.counter %}
-                    {% endifequal %}
+                    {% xy_chart_bullet_info chart obj forloop.counter obj==selected_obj %}
                 {% endfor %}
                 {% endwith %}
 
