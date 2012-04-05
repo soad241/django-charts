@@ -5,7 +5,7 @@ register = template.Library()
 @register.filter
 def jsfloatformat(value):
     try:
-        return str(float(jsfloatformat)).replace(',', '.')
+        return str(float(value)).replace(',', '.')
     except ValueError:
         return value
 
