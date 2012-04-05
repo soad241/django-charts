@@ -42,26 +42,11 @@
                 // ZEICHNET DIE BULLETS
                 {% with chart.get_selected as selected_obj %}
                 {% for obj in queryset %}
-                    {% with forloop.counter as idx %}
-                    var graph{{idx}} = new AmCharts.AmGraph();
-                    graph{{idx}}.xField = "x{{idx}}"; // **This is connected to the data above.
-                    graph{{idx}}.yField = "y{{idx}}"; // **This is connected to the data above.
-                    graph{{idx}}.balloonText = "{{chart.bullet_text}}";				
-                    graph{{idx}}.lineAlpha = {{chart.line_alpha}};
-                    graph{{idx}}.labelText = "{{chart.bullet_text}}";
                     {% ifequal obj selected_obj %}
-                        graph{{idx}}.bullet = "{{chart.selected_bullet_shape}}";
-                        graph{{idx}}.lineColor = "{{chart.selected_bullet_color}}";
-                        graph{{idx}}.color = "{{chart.selected_bullet_text_color}}";
-                        graph{{idx}}.bulletSize = {{chart.selected_bullet_size}};
+                        {% xy_chart_bullet_info chart obj forloop.counter True %}
                     {% else %}
-                        graph{{idx}}.bullet = "{{chart.bullet_shape}}";
-                        graph{{idx}}.lineColor = "{{chart.bullet_color}}";
-                        graph{{idx}}.color = "{{chart.bullet_text_color}}";
-                        graph{{idx}}.bulletSize = {{chart.bullet_size}};
-                    {% endifequal %}
-                    chart.addGraph(graph{{idx}});
-                    {% endwith %}
+                        {% xy_chart_bullet_info chart obj forloop.counter %}
+                    {% endif %}
                 {% endfor %}
                 {% endwith %}
 

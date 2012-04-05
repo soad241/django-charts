@@ -10,13 +10,9 @@ class XYChart(BaseChart):
     bullet_text = "([[x]], [[y]])"
     bullet_shape = 'round'
     bullet_size = 20
-    bullet_color = '#595959'
-    bullet_text_color = '#595959'
 
     selected_bullet_shape = 'round'
     selected_bullet_size = 40
-    selected_bullet_color = '#A042C2'
-    selected_bullet_text_color = '#000000'
 
     class XAxis:
         title = None
@@ -28,6 +24,9 @@ class XYChart(BaseChart):
         position = 'left'
         auto_grid_count = True
 
+    def get_selected(self):
+        return None
+
     def get_label_text(self, obj):
         raise ImproperlyConfigured(_("XYChart requires a definition of "
                                      "'get_label_text'"))
@@ -36,6 +35,11 @@ class XYChart(BaseChart):
         raise ImproperlyConfigured(_("XYChart requires a definition of "
                                      "'get_xy_values'"))
 
-    def get_selected(self):
-        return None
+    def get_color(self, obj, selected=False):
+        raise ImproperlyConfigured(_("XYChart requires a definition of "
+                                     "'get_color'"))
+
+    def get_text_color(self, obj, selected=False):
+        raise ImproperlyConfigured(_("XYChart requires a definition of "
+                                     "'get_text_color'"))        
 

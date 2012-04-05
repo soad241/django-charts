@@ -1,0 +1,16 @@
+var graph{{idx}} = new AmCharts.AmGraph();
+graph{{idx}}.xField = "x{{idx}}"; // **This is connected to the data above.
+graph{{idx}}.yField = "y{{idx}}"; // **This is connected to the data above.
+graph{{idx}}.balloonText = "{{chart.bullet_text}}";				
+graph{{idx}}.lineAlpha = {{chart.line_alpha}};
+graph{{idx}}.labelText = "{{label_text}}";
+{% if selected %}
+    graph{{idx}}.bullet = "{{chart.selected_bullet_shape}}";
+    graph{{idx}}.bulletSize = {{chart.selected_bullet_size}};
+{% else %}
+    graph{{idx}}.bullet = "{{chart.bullet_shape}}";
+    graph{{idx}}.bulletSize = {{chart.bullet_size}};
+{% endif %}
+graph{{idx}}.lineColor = "{{color}}";
+graph{{idx}}.color = "{{text_color}}";
+chart.addGraph(graph{{idx}});
