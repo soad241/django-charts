@@ -24,7 +24,6 @@ def xy_chart_obj_info(chart, obj, idx):
 
 @register.inclusion_tag('charts/xy_chart_bullet_info.html')
 def xy_chart_bullet_info(chart, obj, idx, selected=False):
-    x, y = chart.get_(obj)
     return {'chart': chart,
             'label_text': chart.get_label_text(obj),
             'color': chart.get_color(obj, selected),
