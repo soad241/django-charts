@@ -8,14 +8,20 @@ class BaseChart:
     width = None
     height = None
     template = None
-    obj_pk = None
+
+    def __init__(self, obj_pk=None):
+        if obj_pk:
+           self.object = self.get_object(obj_pk)
+        else:
+            self.object = None
+
+    def get_object(self, obj_pk):
+        raise ImproperlyConfigured(_("Chart requires a definition of "
+                                     "'get_object'"))
 
     def get_queryset(self):
         raise ImproperlyConfigured(_("Chart requires a definition of "
                                      "'get_queryset'"))
-
-    def get_object(self):
-        return None
 
     def render(self, **context):
         context['chart'] = self
