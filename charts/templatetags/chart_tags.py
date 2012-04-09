@@ -30,3 +30,8 @@ def xy_chart_bullet_info(chart, obj, idx, selected=False):
             'text_color': chart.get_text_color(obj, selected),
             'idx': idx,
             'selected': selected}
+
+@register.inclusion_tag('charts/line_chart_obj_info.html')
+def line_chart_obj_info(chart, obj):
+    return {'date': chart.get_date(obj),
+            'value': chart.get_value(obj)}

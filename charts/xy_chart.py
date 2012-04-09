@@ -7,7 +7,7 @@ class XYChart(BaseChart):
     start_duration = 0
     font_family = 'Arial'
     
-    bullet_text = "([[x]], [[y]])"
+    bullet_text = '([[x]], [[y]])'
     bullet_shape = 'round'
     bullet_size = 20
 
