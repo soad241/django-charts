@@ -1,7 +1,7 @@
 {% load chart_tags %}
-<script src="{{MEDIA_URL}}amcharts/amcharts.js" type="text/javascript">
+<script src="{{MEDIA_URL}}charts/amcharts/amcharts.js" type="text/javascript">
 </script>
-<script src="{{MEDIA_URL}}amcharts/raphael.js" type="text/javascript">
+<script src="{{MEDIA_URL}}charts/amcharts/raphael.js" type="text/javascript">
 </script>
         <script type="text/javascript">
 		{% with chart.get_queryset as queryset %}
@@ -18,7 +18,7 @@
             AmCharts.ready(function () {
                 // XY Chart
                 chart = new AmCharts.AmXYChart();
-                chart.pathToImages = "{{MEDIA_URL}}amcharts/images/";
+                chart.pathToImages = "{{MEDIA_URL}}charts/amcharts/images/";
                 chart.dataProvider = chartData;
                 chart.startDuration = {{chart.start_duration}};
 				chart.fontFamily = "{{chart.font_family}}";
