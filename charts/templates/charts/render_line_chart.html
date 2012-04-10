@@ -11,7 +11,7 @@
 			var chart;
 			
 			var chartData = [
-            {% for obj in queryset %}
+            {% for obj in chart.get_queryset %}
                 {
                     {% line_chart_obj_info chart obj %}
                 }{% if not forloop.last %},{% endif %}
