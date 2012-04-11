@@ -7,7 +7,7 @@ class ChartPool(object):
     def __init__(self):
         self._charts = {}
 
-    def register(chart_class):
+    def register(self, chart_class):
         if not isinstance(chart_class, BaseChart):
             raise ValueError(_('Registered class must be a chart '
                              '(subclass of BaseChart)'))
@@ -22,4 +22,4 @@ class ChartPool(object):
     def get_chart_class(self, chart_slug):
         return self._charts.get(chart_slug)
 
-chart_pool = ChartPool
+chart_pool = ChartPool()
