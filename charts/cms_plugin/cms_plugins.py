@@ -13,7 +13,10 @@ class ChartPlugin(CMSPluginBase):
     render_template = "charts/render_chart.html"
 
     def render(self, context, instance, placeholder):
-        context['chart'] = chart_pool.get_chart_class(instance.chart_class)
+        chart_class = chart_pool.get_chart_class(instance.chart_class)
+        context['chart'] = chart_class(width=instance.width,
+                                       height=instance.height,
+                                       obj=instance.content_object)
         return context
 
 plugin_pool.register_plugin(ChartPlugin)
