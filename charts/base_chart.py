@@ -7,14 +7,20 @@ from django.http import HttpResponse
 class BaseChart:
     slug = None
     display_name = None
-
+    template = None
+    
     width = None
     height = None
-    template = None
 
-    def __init__(self, obj_pk=None):
-        if obj_pk:
-           self.object = self.get_object(obj_pk)
+    def __init__(self, width=None, height=None, obj=None, obj_pk=None):
+        if width:
+            self.width = width
+        if height:
+            self.height = height
+        if obj:
+            self.obect = obj
+        elif obj_pk:
+            self.object = self.get_object(obj_pk)
         else:
             self.object = None
 
