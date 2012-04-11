@@ -17,10 +17,8 @@ class BaseChart:
             self.width = width
         if height:
             self.height = height
-        if obj:
-            self.obect = obj
-        elif obj_pk:
-            self.object = self.get_object(obj_pk)
+        if obj or obj_pk:
+            self.object = obj or self.get_object(obj_pk)
         else:
             self.object = None
 
