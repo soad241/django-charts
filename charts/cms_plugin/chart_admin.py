@@ -8,7 +8,7 @@ class ChartPool(object):
         self._charts = {}
 
     def register(self, chart_class):
-        if not isinstance(chart_class, BaseChart):
+        if not issubclass(chart_class, BaseChart):
             raise ValueError(_('Registered class must be a chart '
                              '(subclass of BaseChart)'))
         if not chart_class.slug:

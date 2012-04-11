@@ -7,7 +7,7 @@ from charts.cms_plugin import chart_pool
 
 class ChartPlugin(CMSPluginBase):
     model = ChartPluginModel
-    name = _("Chart Plugin") # Name of the plugin
+    name = _("Chart Plugin")
     render_template = "charts/render_chart.html"
 
     def render(self, context, instance, placeholder):
