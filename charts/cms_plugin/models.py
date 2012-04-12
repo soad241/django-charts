@@ -3,11 +3,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 from cms.models import CMSPlugin
-from charts.cms_plugin import chart_pool
 
 class ChartPluginModel(CMSPlugin):
-    chart_class = models.CharField(max_length=64,
-                                   choices=chart_pool.get_all_charts())
+    chart_class = models.CharField(max_length=64)
     title = models.CharField(max_length=256, blank=True)
     width = models.IntegerField(null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
