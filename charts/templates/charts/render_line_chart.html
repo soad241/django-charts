@@ -97,13 +97,13 @@ Include this css style this in your <head>
 				chart.periodSelector = periodSelector;
 
 
-				chart.write('chartdiv');
+				chart.write('chartdiv-{{div_id}}');
 			}
 			
 		</script>
 	</head>
 	<body style="background-color:#FFFFFF">
-		<div id="chartdiv" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
+		<div id="chartdiv-{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
 	</body>
 
 </html>
