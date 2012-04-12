@@ -6,9 +6,9 @@
         <script type="text/javascript">
 		{% with chart.get_queryset as queryset %}
         
-            var chart;
+            var chart{{div_id}};
 		    
-	        var chartData = [{
+	        var chartData{{div_id}} = [{
             {% for obj in queryset %}
                 {% xy_chart_obj_info chart obj forloop.counter %}
                 {% if not forloop.last %},{% endif %}
@@ -17,27 +17,27 @@
 
             AmCharts.ready(function () {
                 // XY Chart
-                chart = new AmCharts.AmXYChart();
-                chart.pathToImages = "{{MEDIA_URL}}charts/amcharts/images/";
-                chart.dataProvider = chartData;
-                chart.startDuration = {{chart.start_duration}};
-				chart.fontFamily = "{{chart.font_family}}";
+                chart{{div_id}} = new AmCharts.AmXYChart();
+                chart{{div_id}}.pathToImages = "{{MEDIA_URL}}charts/amcharts/images/";
+                chart{{div_id}}.dataProvider = chartData{{div_id}};
+                chart{{div_id}}.startDuration = {{chart.start_duration}};
+				chart{{div_id}}.fontFamily = "{{chart.font_family}}";
 				
 
                 // AXES				
                 // X
-                var xAxis = new AmCharts.ValueAxis();
-                xAxis.title = "{{chart.XAxis.title}}";
-                xAxis.position = "{{chart.XAxis.position}}";
-                xAxis.autoGridCount = {{chart.XAxis.auto_grid_count|yesno:'true,false'}};
-                chart.addValueAxis(xAxis);
+                var xAxis{{div_id}} = new AmCharts.ValueAxis();
+                xAxis{{div_id}}.title = "{{chart.XAxis.title}}";
+                xAxis{{div_id}}.position = "{{chart.XAxis.position}}";
+                xAxis{{div_id}}.autoGridCount = {{chart.XAxis.auto_grid_count|yesno:'true,false'}};
+                chart{{div_id}}.addValueAxis(xAxis{{div_id}});
 
                 // Y
-                var yAxis = new AmCharts.ValueAxis();
-                yAxis.title = "{{chart.YAxis.title}}";
-                yAxis.position = "{{chart.YAxis.position}}";
-                yAxis.autoGridCount = {{chart.YAxis.auto_grid_count|yesno:'true,false'}};
-                chart.addValueAxis(yAxis);
+                var yAxis{{div_id}} = new AmCharts.ValueAxis();
+                yAxis{{div_id}}.title = "{{chart.YAxis.title}}";
+                yAxis{{div_id}}.position = "{{chart.YAxis.position}}";
+                yAxis{{div_id}}.autoGridCount = {{chart.YAxis.auto_grid_count|yesno:'true,false'}};
+                chart{{div_id}}.addValueAxis(yAxis{{div_id}});
                 
                 // ZEICHNET DIE BULLETS
                 {% with chart.get_selected as selected_obj %}
@@ -51,7 +51,7 @@
                 {% endwith %}
 
                 // WRITE
-                chart.write("chartdiv{{div_id}}");
+                chart{{div_id}}.write("chartdiv{{div_id}}");
             });
         {% endwith %}
         </script>
