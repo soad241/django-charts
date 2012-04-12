@@ -6,7 +6,8 @@ from charts.cms_plugin import chart_pool
 
 class ChartPluginModelForm(forms.ModelForm):
     chart_class = forms.ChoiceField()
-    content_type = forms.ModelChoiceField(queryset=ContentType.objects.none())
+    content_type = forms.ModelChoiceField(queryset=ContentType.objects.none(),
+                                          required=False)
 
     class Meta:
         fields = ('chart_class', 'title', 'width', 'height', 'content_type',
