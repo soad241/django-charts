@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.contenttypes.models import ContentType
 
 from charts.cms_plugin.models import ChartPluginModel
 from charts.cms_plugin import chart_pool
