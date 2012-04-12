@@ -39,9 +39,9 @@
 				{% endif %}
 				            
                 // WRITE
-                chart.write("chartdiv-{{div_id}}");
+                chart.write("chartdiv{{div_id}}");
             });
         </script>
     
-    <div id="chartdiv-{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
+    <div id="chartdiv{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
 
