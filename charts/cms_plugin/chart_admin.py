@@ -25,7 +25,7 @@ class ChartPool(object):
         return self._charts.get(chart_slug)
 
     def register_model(self, model):
-        if not issubclass(chart_class, Model):
+        if not issubclass(model, Model):
             raise ValueError(_('Registered model must be a subclass '
                                'of djando.db.models.Model'))
         content_type = ContentType.objects.get_for_model(model)
