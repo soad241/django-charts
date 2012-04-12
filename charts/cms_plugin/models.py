@@ -7,7 +7,7 @@ from charts.cms_plugin import chart_pool
 
 class ChartPluginModel(CMSPlugin):
     chart_class = models.CharField(max_length=64,
-                                   choices=chart_pool.get_choices())
+                                   choices=chart_pool.get_all_charts())
     title = models.CharField(max_length=256, blank=True)
     width = models.IntegerField(null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
