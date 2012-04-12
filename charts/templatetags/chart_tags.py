@@ -16,18 +16,20 @@ def pie_chart_obj_info(chart, obj):
             'color': chart.get_color(obj)}
 
 @register.inclusion_tag('charts/xy_chart_obj_info.html')
-def xy_chart_obj_info(chart, obj, idx):
+def xy_chart_obj_info(chart, obj, div_id, idx):
     x, y = chart.get_xy_values(obj)
     return {'x': x,
             'y': y,
+            'div_id': div_id,
             'idx': idx}
 
 @register.inclusion_tag('charts/xy_chart_bullet_info.html')
-def xy_chart_bullet_info(chart, obj, idx, selected=False):
+def xy_chart_bullet_info(chart, obj, div_id, idx, selected=False):
     return {'chart': chart,
             'label_text': chart.get_label_text(obj),
             'color': chart.get_color(obj, selected),
             'text_color': chart.get_text_color(obj, selected),
+            'div_id': div_id,
             'idx': idx,
             'selected': selected}
 
