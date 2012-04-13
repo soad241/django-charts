@@ -1,3 +1,4 @@
+{% load sekizai_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,9 +12,11 @@
     </script>
     {% block head_content %}
     {% endblock %}
+    {% render_block "css" %}
   </head>
   <body>
     {% block body_content %}
     {% endblock %}
+    {% render_block "js" %}
   </body>
 </html>
