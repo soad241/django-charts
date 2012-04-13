@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext as _
 
+from settings import MEDIA_URL
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from charts.cms_plugin.models import ChartPluginModel
