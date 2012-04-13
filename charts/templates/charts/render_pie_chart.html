@@ -1,47 +1,43 @@
 {% load chart_tags %}
-<script src="{{MEDIA_URL}}charts/amcharts/amcharts.js" type="text/javascript">
-</script>
-<script src="{{MEDIA_URL}}charts/amcharts/raphael.js" type="text/javascript">
-</script>
-        <script type="text/javascript">
-            var chart{{div_id}};
-		
-	        var chartData{{div_id}} = [
-            {% for obj in chart.get_queryset %}
-                {
-                    {% pie_chart_obj_info chart obj %}
-                }{% if not forloop.last %},{% endif %}
-            {% endfor %}
-            ];
+<script type="text/javascript">
+    var chart{{div_id}};
 
-            AmCharts.ready(function () {
-                // PIE CHART
-                chart{{div_id}} = new AmCharts.AmPieChart();
-                chart{{div_id}}.dataProvider = chartData{{div_id}};
-                chart{{div_id}}.titleField = "title";
-                chart{{div_id}}.valueField = "value";
-	            chart{{div_id}}.colorField = "color";
-                chart{{div_id}}.outlineColor = "{{chart.outline_color}}";
-	            chart{{div_id}}.labelText = "{{chart.label_text}}";
-		        chart{{div_id}}.labelRadius = {{chart.label_radius}};
-                chart{{div_id}}.outlineAlpha = {{chart.outline_alpha}};
-                chart{{div_id}}.outlineThickness = {{chart.outline_thickness}};
-				
-                // LEGEND
-				{% if chart.has_legend %}
-				    var legend{{div_id}};
-                    legend{{div_id}} = new AmCharts.AmLegend();
-                    legend{{div_id}}.align = "{{chart.Legend.align}}";
-                    legend{{div_id}}.markerType = "{{chart.Legend.marker_type}}";
-				    legend{{div_id}}.position = "{{chart.Legend.position}}";
-				    legend{{div_id}}.switchable = {{chart.Legend.switchable|yesno:'true,false'}};
-                    chart{{div_id}}.addLegend(legend{{div_id}});
-				{% endif %}
-				            
-                // WRITE
-                chart{{div_id}}.write("chartdiv{{div_id}}");
-            });
-        </script>
-    
-    <div id="chartdiv{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
+    var chartData{{div_id}} = [
+    {% for obj in chart.get_queryset %}
+        {
+            {% pie_chart_obj_info chart obj %}
+        }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+    ];
+
+    AmCharts.ready(function () {
+        // PIE CHART
+        chart{{div_id}} = new AmCharts.AmPieChart();
+        chart{{div_id}}.dataProvider = chartData{{div_id}};
+        chart{{div_id}}.titleField = "title";
+        chart{{div_id}}.valueField = "value";
+        chart{{div_id}}.colorField = "color";
+        chart{{div_id}}.outlineColor = "{{chart.outline_color}}";
+        chart{{div_id}}.labelText = "{{chart.label_text}}";
+        chart{{div_id}}.labelRadius = {{chart.label_radius}};
+        chart{{div_id}}.outlineAlpha = {{chart.outline_alpha}};
+        chart{{div_id}}.outlineThickness = {{chart.outline_thickness}};
+		
+        // LEGEND
+		{% if chart.has_legend %}
+		    var legend{{div_id}};
+            legend{{div_id}} = new AmCharts.AmLegend();
+            legend{{div_id}}.align = "{{chart.Legend.align}}";
+            legend{{div_id}}.markerType = "{{chart.Legend.marker_type}}";
+		    legend{{div_id}}.position = "{{chart.Legend.position}}";
+		    legend{{div_id}}.switchable = {{chart.Legend.switchable|yesno:'true,false'}};
+            chart{{div_id}}.addLegend(legend{{div_id}});
+		{% endif %}
+		            
+        // WRITE
+        chart{{div_id}}.write("chartdiv{{div_id}}");
+    });
+</script>
+
+<div id="chartdiv{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
 
