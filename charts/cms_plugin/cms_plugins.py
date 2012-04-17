@@ -22,8 +22,6 @@ class ChartPlugin(CMSPluginBase):
 
     class Media:
         js = (MEDIA_URL + 'charts/amstocks/amstock.js',
-              MEDIA_URL + 'charts/amstocks/raphael.js',
-              MEDIA_URL + 'charts/amcharts/amcharts.js',
-              MEDIA_URL + 'charts/amcharts/raphael.js')
+              MEDIA_URL + 'charts/amstocks/raphael.js')
 
 plugin_pool.register_plugin(ChartPlugin)
