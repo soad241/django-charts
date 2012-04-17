@@ -3,10 +3,6 @@
 Include this css style this in your <head>
 <link rel="stylesheet" href="{{MEDIA_URL}}charts/amstocks/style.css" type="text/css">
 -->
-<script src="{{MEDIA_URL}}charts/amstocks/amstock.js" type="text/javascript">
-</script>
-<script src="{{MEDIA_URL}}charts/amstocks/raphael.js" type="text/javascript">
-</script>
         <script type="text/javascript">
 			AmCharts.ready(function () {
 				createStockChart();
@@ -101,9 +97,4 @@ Include this css style this in your <head>
 			}
 			
 		</script>
-	</head>
-	<body style="background-color:#FFFFFF">
 		<div id="chartdiv" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
-	</body>
-
-</html>
