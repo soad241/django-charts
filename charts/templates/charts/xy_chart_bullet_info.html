@@ -1,16 +1,16 @@
-var graph{{idx}} = new AmCharts.AmGraph();
-graph{{idx}}.xField = "x{{idx}}"; // **This is connected to the data above.
-graph{{idx}}.yField = "y{{idx}}"; // **This is connected to the data above.
-graph{{idx}}.balloonText = "{{chart.bullet_text}}";				
-graph{{idx}}.lineAlpha = {{chart.line_alpha}};
-graph{{idx}}.labelText = "{{label_text}}";
+var graph{{div_id}}_{{idx}} = new AmCharts.AmGraph();
+graph{{div_id}}_{{idx}}.xField = "x{{div_id}}_{{idx}}"; // **This is connected to the data above.
+graph{{div_id}}_{{idx}}.yField = "y{{div_id}}_{{idx}}"; // **This is connected to the data above.
+graph{{div_id}}_{{idx}}.balloonText = "{{chart.bullet_text}}";				
+graph{{div_id}}_{{idx}}.lineAlpha = {{chart.line_alpha}};
+graph{{div_id}}_{{idx}}.labelText = "{{label_text}}";
 {% if selected %}
-    graph{{idx}}.bullet = "{{chart.selected_bullet_shape}}";
-    graph{{idx}}.bulletSize = {{chart.selected_bullet_size}};
+    graph{{div_id}}_{{idx}}.bullet = "{{chart.selected_bullet_shape}}";
+    graph{{div_id}}_{{idx}}.bulletSize = {{chart.selected_bullet_size}};
 {% else %}
-    graph{{idx}}.bullet = "{{chart.bullet_shape}}";
-    graph{{idx}}.bulletSize = {{chart.bullet_size}};
+    graph{{div_id}}_{{idx}}.bullet = "{{chart.bullet_shape}}";
+    graph{{div_id}}_{{idx}}.bulletSize = {{chart.bullet_size}};
 {% endif %}
-graph{{idx}}.lineColor = "{{color}}";
-graph{{idx}}.color = "{{text_color}}";
-chart.addGraph(graph{{idx}});
+graph{{div_id}}_{{idx}}.lineColor = "{{color}}";
+graph{{div_id}}_{{idx}}.color = "{{text_color}}";
+chart{{div_id}}.addGraph(graph{{div_id}}_{{idx}});

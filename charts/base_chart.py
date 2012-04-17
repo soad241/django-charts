@@ -1,3 +1,5 @@
+from random import randint
+
 from django.core.exceptions import ImproperlyConfigured
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
@@ -32,5 +34,6 @@ class BaseChart:
 
     def render(self, **context):
         context['chart'] = self
-        context['MEDIA_URL'] = settings.MEDIA_URL
+        context['div_id'] = randint(1,999999999)
         return render_to_string(self.template, context)
+

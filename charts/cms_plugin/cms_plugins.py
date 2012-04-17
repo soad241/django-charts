@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext as _
 
+from settings import MEDIA_URL
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from charts.cms_plugin.models import ChartPluginModel
@@ -8,7 +9,7 @@ from charts.cms_plugin import chart_pool
 
 class ChartPlugin(CMSPluginBase):
     model = ChartPluginModel
-    name = _("Chart Plugin")
+    name = _("Chart")
     form = ChartPluginModelForm
     render_template = "charts/render_chart.html"
 
@@ -18,5 +19,11 @@ class ChartPlugin(CMSPluginBase):
                                        height=instance.height,
                                        obj=instance.content_object)
         return context
+
+    class Media:
+        js = (MEDIA_URL + 'charts/amstocks/amstock.js',
+              MEDIA_URL + 'charts/amstocks/raphael.js',
+              MEDIA_URL + 'charts/amcharts/amcharts.js',
+              MEDIA_URL + 'charts/amcharts/raphael.js')
 
 plugin_pool.register_plugin(ChartPlugin)

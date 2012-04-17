@@ -1,100 +1,102 @@
 {% load chart_tags %}
+<<<<<<< HEAD
 <!--
 Include this css style this in your <head>
 <link rel="stylesheet" href="{{MEDIA_URL}}charts/amstocks/style.css" type="text/css">
 -->
-        <script type="text/javascript">
-			AmCharts.ready(function () {
-				createStockChart();
-			});
+<script type="text/javascript">
+	AmCharts.ready(function () {
+		createStockChart();
+	});
 
-			var chart;
-			
-			var chartData = [
-            {% for obj in chart.get_queryset %}
-                {
-                    {% line_chart_obj_info chart obj %}
-                }{% if not forloop.last %},{% endif %}
-            {% endfor %}
-            ];
-			
-			var newPanel;
-			var stockPanel;
+	var chart{{div_id}};
+	
+	var chartData{{div_id}} = [
+    {% for obj in chart.get_queryset %}
+        {
+            {% line_chart_obj_info chart obj %}
+        }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+    ];
+	
+	var newPanel{{div_id}};
+	var stockPanel{{div_id}};
 
-			function createStockChart() {
-				chart = new AmCharts.AmStockChart();
-				chart.pathToImages = "{{MEDIA_URL}}charts/amstocks/images/";
+	function createStockChart() {
+		chart{{div_id}} = new AmCharts.AmStockChart();
+		chart{{div_id}}.pathToImages = "{{MEDIA_URL}}charts/amstocks/images/";
 
-				// DATASET //////////////////////////////////////////
-				var dataSet = new AmCharts.DataSet();
-				dataSet.fieldMappings = [{
-					fromField: "value",
-					toField: "value"
-				}];
-				dataSet.color = "{{chart.color}}";
-				dataSet.dataProvider = chartData;
-				dataSet.categoryField = "date";
+		// DATASET //////////////////////////////////////////
+		var dataSet{{div_id}} = new AmCharts.DataSet();
+		dataSet{{div_id}}.fieldMappings = [{
+			fromField: "value",
+			toField: "value"
+		}];
+		dataSet{{div_id}}.color = "{{chart.color}}";
+		dataSet{{div_id}}.dataProvider = chartData{{div_id}};
+		dataSet{{div_id}}.categoryField = "date";
 
-				chart.dataSets = [dataSet];
+		chart{{div_id}}.dataSets = [dataSet{{div_id}}];
 
-				// PANELS ///////////////////////////////////////////                                                  
-				stockPanel = new AmCharts.StockPanel();
-				stockPanel.title = "{{chart.title}}";
+		// PANELS ///////////////////////////////////////////                                                  
+		stockPanel{{div_id}} = new AmCharts.StockPanel();
+		stockPanel{{div_id}}.title = "{{chart.title}}";
 
-				// graph of first stock panel
-				var graph = new AmCharts.StockGraph();
-				graph.type = "line";
-				graph.valueField = "value";
-				graph.lineColor = "{{chart.line_color}}"
-				graph.showBalloon = {{chart.show_balloon|yesno:'true,false'}};
-				graph.useDataSetColors = {{chart.use_dataset_colors|yesno:'true,false'}};
-				graph.legendValueText = "{{chart.value_text}}"
-				stockPanel.addStockGraph(graph);
+		// graph of first stock panel
+		var graph{{div_id}} = new AmCharts.StockGraph();
+		graph{{div_id}}.type = "line";
+		graph{{div_id}}.valueField = "value";
+		graph{{div_id}}.lineColor = "{{chart.line_color}}"
+		graph{{div_id}}.showBalloon = {{chart.show_balloon|yesno:'true,false'}};
+		graph{{div_id}}.useDataSetColors = {{chart.use_dataset_colors|yesno:'true,false'}};
+		graph{{div_id}}.legendValueText = "{{chart.value_text}}"
+		stockPanel{{div_id}}.addStockGraph(graph{{div_id}});
 
-				var stockLegend = new AmCharts.StockLegend();
-				stockLegend.markerType = "none";
-				stockLegend.markerSize = 0;
-				stockLegend.valueTextRegular = undefined;
-				stockLegend.valueWidth = 0;
-				stockPanel.stockLegend = stockLegend;
+		var stockLegend{{div_id}} = new AmCharts.StockLegend();
+		stockLegend{{div_id}}.markerType = "none";
+		stockLegend{{div_id}}.markerSize = 0;
+		stockLegend{{div_id}}.valueTextRegular = undefined;
+		stockLegend{{div_id}}.valueWidth = 0;
+		stockPanel{{div_id}}.stockLegend = stockLegend{{div_id}};
 
-				chart.panels = [stockPanel];			
+		chart{{div_id}}.panels = [stockPanel{{div_id}}];
 
-				var categoryAxesSettings = new AmCharts.CategoryAxesSettings();
-                categoryAxesSettings.equalSpacing = {{chart.equal_spacing|yesno:'true,false'}};
-                categoryAxesSettings.maxSeries = {{chart.max_series}};
-                chart.categoryAxesSettings = categoryAxesSettings;
-				
-				// OTHER SETTINGS ////////////////////////////////////
-				var sbsettings = new AmCharts.ChartScrollbarSettings();
-				sbsettings.graph = graph;
-				sbsettings.graphType = "line";
-				chart.chartScrollbarSettings = sbsettings;
-
-
-				// PERIOD SELECTOR ///////////////////////////////////
-				var periodSelector = new AmCharts.PeriodSelector();
-				periodSelector.position = "{{chart.PeriodSelector.position}}";
-				periodSelector.dateFormat = "{{chart.PeriodSelector.date_format}}";
-				periodSelector.inputFieldsEnabled = {{chart.PeriodSelector.input_fields_enabled|yesno:'true,false'}};
-				periodSelector.fromText = "{{chart.PeriodSelector.from_text}}";
-				periodSelector.toText = "{{chart.PeriodSelector.to_text}}";
-				periodSelector.periodsText = "{{chart.PeriodSelector.periods_text}}";
-				periodSelector.periods = [
-				    {% for period in chart.PeriodSelector.periods %}
-				        {
-				            period: {{period.period}},
-				            label: {{period.label}}
-				            {% if period.count %},count: {{period.count}}{% endif %}
-				            {% if period.selected %},selected: true{% endif %}
-				        }{% if not forloop.last %},{% endif %}
-				    {% endfor %}
-				];
-				chart.periodSelector = periodSelector;
+		var categoryAxesSettings{{div_id}} = new AmCharts.CategoryAxesSettings();
+        categoryAxesSettings{{div_id}}.equalSpacing = {{chart.equal_spacing|yesno:'true,false'}};
+        categoryAxesSettings{{div_id}}.maxSeries = {{chart.max_series}};
+        chart{{div_id}}.categoryAxesSettings = categoryAxesSettings{{div_id}};
+		
+		// OTHER SETTINGS ////////////////////////////////////
+		var sbsettings{{div_id}} = new AmCharts.ChartScrollbarSettings();
+		sbsettings{{div_id}}.graph = graph{{div_id}};
+		sbsettings{{div_id}}.graphType = "line";
+		chart{{div_id}}.chartScrollbarSettings = sbsettings{{div_id}};
 
 
-				chart.write('chartdiv');
-			}
-			
-		</script>
-		<div id="chartdiv" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
+		// PERIOD SELECTOR ///////////////////////////////////
+		var periodSelector{{div_id}} = new AmCharts.PeriodSelector();
+		periodSelector{{div_id}}.position = "{{chart.PeriodSelector.position}}";
+		periodSelector{{div_id}}.dateFormat = "{{chart.PeriodSelector.date_format}}";
+		periodSelector{{div_id}}.inputFieldsEnabled = {{chart.PeriodSelector.input_fields_enabled|yesno:'true,false'}};
+		periodSelector{{div_id}}.fromText = "{{chart.PeriodSelector.from_text}}";
+		periodSelector{{div_id}}.toText = "{{chart.PeriodSelector.to_text}}";
+		periodSelector{{div_id}}.periodsText = "{{chart.PeriodSelector.periods_text}}";
+		periodSelector{{div_id}}.periods = [
+		    {% for period in chart.PeriodSelector.periods %}
+		        {
+		            period: {{period.period}},
+		            label: {{period.label}}
+		            {% if period.count %},count: {{period.count}}{% endif %}
+		            {% if period.selected %},selected: true{% endif %}
+		        }{% if not forloop.last %},{% endif %}
+		    {% endfor %}
+		];
+		chart{{div_id}}.periodSelector = periodSelector{{div_id}};
+
+
+		chart{{div_id}}.write('chartdiv{{div_id}}');
+	}
+	
+</script>
+
+<div id="chartdiv{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
