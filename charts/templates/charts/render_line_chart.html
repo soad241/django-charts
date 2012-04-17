@@ -1,4 +1,8 @@
 {% load chart_tags %}
+<!--
+Include this css style this in your <head>
+<link rel="stylesheet" href="{{MEDIA_URL}}charts/amstocks/style.css" type="text/css">
+-->
 <script type="text/javascript">
 	AmCharts.ready(function () {
 		createStockChart();
@@ -95,4 +99,3 @@
 </script>
 
 <div id="chartdiv{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
-
