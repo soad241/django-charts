@@ -22,15 +22,6 @@ Include this css style this in your <head>
 		chart{{div_id}} = new AmCharts.AmStockChart();
 		chart{{div_id}}.pathToImages = "{{MEDIA_URL}}charts/amstocks/images/";
 
-				var dataSet1 = new AmCharts.DataSet();
-				dataSet1.title = "first data set";
-				dataSet1.fieldMappings = [{
-					fromField: "value",
-					toField: "value"
-				}];
-				dataSet1.dataProvider = chartData1;
-				dataSet1.categoryField = "date";
-
         {% for dataset in datasets %}
             {% line_chart_dataset_detail chart dataset div_id forloop.counter %}
         {% endfor %}
