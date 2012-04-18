@@ -11,13 +11,10 @@ class LineChart(BaseChart):
     template = 'charts/render_line_chart.html'
 
     title = ''
-    show_category_axis = False
-    percent_height = 70
     
-    color = '#000000'
-    line_color = '#FF0000'
-
-    comparable = False
+    show_category_axis = False
+    percent_height = 70    
+    comparable = True
     show_balloon = False
     use_dataset_colors = False
     value_text = '[[value]]'
