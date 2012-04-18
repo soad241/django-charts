@@ -32,6 +32,12 @@ Include this css style this in your <head>
 		    {% endfor %}
 		];
 
+		// PANELS ///////////////////////////////////////////                                                  
+		var stockPanel{{div_id}} = new AmCharts.StockPanel();
+		stockPanel{{div_id}}.showCategoryAxis = {{chart.show_category_axis|yesno:'true,false'}};
+		stockPanel{{div_id}}.title = "{{chart.title}}";
+		stockPanel{{div_id}}.percentHeight = "{{chart.percent_height}}";
+
 		// graph of first stock panel
 		var graph{{div_id}} = new AmCharts.StockGraph();
 		graph{{div_id}}.type = "line";
@@ -43,14 +49,10 @@ Include this css style this in your <head>
 		graph{{div_id}}.legendValueText = "{{chart.value_text}}"
 		stockPanel{{div_id}}.addStockGraph(graph{{div_id}});
 
-		// PANELS ///////////////////////////////////////////                                                  
-		var stockPanel{{div_id}} = new AmCharts.StockPanel();
-		stockPanel{{div_id}}.showCategoryAxis = {{chart.show_category_axis|yesno:'true,false'}};
-		stockPanel{{div_id}}.title = "{{chart.title}}";
-		stockPanel{{div_id}}.percentHeight = "{{chart.percent_height}}";
-
+        // create stock legend  
 		stockPanel{{div_id}}.stockLegend = new AmCharts.StockLegend();
 
+        // set panels to the chart
 		chart{{div_id}}.panels = [stockPanel{{div_id}}];
 
 		var categoryAxesSettings{{div_id}} = new AmCharts.CategoryAxesSettings();
