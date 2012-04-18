@@ -1,6 +1,5 @@
 from django.utils.translation import ugettext as _
 
-from settings import MEDIA_URL
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from charts.cms_plugin.models import ChartPluginModel
@@ -21,8 +20,10 @@ class ChartPlugin(CMSPluginBase):
         return context
 
     class Media:
-        js = (MEDIA_URL + 'charts/amstocks/amstock.js',
-              MEDIA_URL + 'charts/amstocks/raphael.js')
-        css = (MEDIA_URL + 'charts/amstocks/style.css',)
+        css = {
+            'extra': ('charts/amstocks/style.css',)
+        }
+        js = ('charts/amstocks/amstock.js',
+              'charts/amstocks/raphael.js')
 
 plugin_pool.register_plugin(ChartPlugin)
