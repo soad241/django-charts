@@ -33,7 +33,20 @@ def xy_chart_bullet_info(chart, obj, div_id, idx, selected=False):
             'idx': idx,
             'selected': selected}
 
+@register.inclusion_tag('charts/line_chart_dataset_info.html')
+def line_chart_dataset_info(chart, dataset):
+    return {'chart': chart,
+            'queryset': chart.get_queryset(dataset)}
+
 @register.inclusion_tag('charts/line_chart_obj_info.html')
 def line_chart_obj_info(chart, obj):
     return {'date': chart.get_date(obj),
             'value': chart.get_value(obj)}
+
+@register.inclusion_tag('charts/line_chart_dataset_detail.html')
+def line_chart_dataset_detail(chart, dataset, div_id, idx):
+    return {'title': chart.get_title(dataset),
+            'color': chart.get_color(dataset),
+            'div_id': div_id,
+            'idx': idx}
+

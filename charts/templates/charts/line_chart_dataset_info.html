@@ -1,0 +1,5 @@
+{% for obj in queryset %}
+    {
+        {% line_chart_obj_info chart obj %}
+    }{% if not forloop.last %},{% endif %}
+{% endfor %}

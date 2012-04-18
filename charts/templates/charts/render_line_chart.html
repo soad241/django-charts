@@ -4,59 +4,62 @@ Include this css style this in your <head>
 <link rel="stylesheet" href="{{MEDIA_URL}}charts/amstocks/style.css" type="text/css">
 -->
 <script type="text/javascript">
+{% with chart.get_datasets as datasets %}
+
 	AmCharts.ready(function () {
 		createStockChart();
 	});
 
 	var chart{{div_id}};
 	
-	var chartData{{div_id}} = [
-    {% for obj in chart.get_queryset %}
-        {
-            {% line_chart_obj_info chart obj %}
-        }{% if not forloop.last %},{% endif %}
+	{% for dataset in datasets %}
+    	var chartData{{div_id}}_{{forloop.counter}} = [
+            {% line_chart_dataset_info chart dataset %}
+        ];
     {% endfor %}
-    ];
 	
-	var newPanel{{div_id}};
-	var stockPanel{{div_id}};
-
 	function createStockChart() {
 		chart{{div_id}} = new AmCharts.AmStockChart();
 		chart{{div_id}}.pathToImages = "{{MEDIA_URL}}charts/amstocks/images/";
 
-		// DATASET //////////////////////////////////////////
-		var dataSet{{div_id}} = new AmCharts.DataSet();
-		dataSet{{div_id}}.fieldMappings = [{
-			fromField: "value",
-			toField: "value"
-		}];
-		dataSet{{div_id}}.color = "{{chart.color}}";
-		dataSet{{div_id}}.dataProvider = chartData{{div_id}};
-		dataSet{{div_id}}.categoryField = "date";
+				var dataSet1 = new AmCharts.DataSet();
+				dataSet1.title = "first data set";
+				dataSet1.fieldMappings = [{
+					fromField: "value",
+					toField: "value"
+				}];
+				dataSet1.dataProvider = chartData1;
+				dataSet1.categoryField = "date";
 
-		chart{{div_id}}.dataSets = [dataSet{{div_id}}];
+        {% for dataset in datasets %}
+            {% line_chart_dataset_detail chart dataset div_id forloop.counter %}
+        {% endfor %}
 
-		// PANELS ///////////////////////////////////////////                                                  
-		stockPanel{{div_id}} = new AmCharts.StockPanel();
-		stockPanel{{div_id}}.title = "{{chart.title}}";
+		chart{{div_id}}.dataSets = [
+		    {% for dataset in datasets %}
+		        dataSet{{div_id}}_{{forloop.counter}}{% if not forloop.last %},{% endif %}
+		    {% endfor %}
+		];
 
 		// graph of first stock panel
 		var graph{{div_id}} = new AmCharts.StockGraph();
 		graph{{div_id}}.type = "line";
 		graph{{div_id}}.valueField = "value";
+		graph{{div_id}}.comparable = {{chart.comparable|yesno:'true,false'}};
+		graph{{div_id}}.compareField = "value";
 		graph{{div_id}}.lineColor = "{{chart.line_color}}"
 		graph{{div_id}}.showBalloon = {{chart.show_balloon|yesno:'true,false'}};
 		graph{{div_id}}.useDataSetColors = {{chart.use_dataset_colors|yesno:'true,false'}};
 		graph{{div_id}}.legendValueText = "{{chart.value_text}}"
 		stockPanel{{div_id}}.addStockGraph(graph{{div_id}});
 
-		var stockLegend{{div_id}} = new AmCharts.StockLegend();
-		stockLegend{{div_id}}.markerType = "none";
-		stockLegend{{div_id}}.markerSize = 0;
-		stockLegend{{div_id}}.valueTextRegular = undefined;
-		stockLegend{{div_id}}.valueWidth = 0;
-		stockPanel{{div_id}}.stockLegend = stockLegend{{div_id}};
+		// PANELS ///////////////////////////////////////////                                                  
+		var stockPanel{{div_id}} = new AmCharts.StockPanel();
+		stockPanel{{div_id}}.showCategoryAxis = {{chart.show_category_axis|yesno:'true,false'}};
+		stockPanel{{div_id}}.title = "{{chart.title}}";
+		stockPanel{{div_id}}.percentHeight = "{{chart.percent_height}}";
+
+		stockPanel{{div_id}}.stockLegend = new AmCharts.StockLegend();
 
 		chart{{div_id}}.panels = [stockPanel{{div_id}}];
 
@@ -68,7 +71,6 @@ Include this css style this in your <head>
 		// OTHER SETTINGS ////////////////////////////////////
 		var sbsettings{{div_id}} = new AmCharts.ChartScrollbarSettings();
 		sbsettings{{div_id}}.graph = graph{{div_id}};
-		sbsettings{{div_id}}.graphType = "line";
 		chart{{div_id}}.chartScrollbarSettings = sbsettings{{div_id}};
 
 
@@ -92,10 +94,15 @@ Include this css style this in your <head>
 		];
 		chart{{div_id}}.periodSelector = periodSelector{{div_id}};
 
+		// DATA SET SELECTOR
+		var dataSetSelector{{div_id}} = new AmCharts.DataSetSelector();
+		dataSetSelector{{div_id}}.position = "{{chart.dataset_selector_position}}";
+		chart.dataSetSelector = dataSetSelector{{div_id}};
 
 		chart{{div_id}}.write('chartdiv{{div_id}}');
 	}
-	
+
+{% endwith %}
 </script>
 
 <div id="chartdiv{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>

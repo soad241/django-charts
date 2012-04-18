@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.http import HttpResponse
 
-class BaseChart:
+class BaseChart(object):
     slug = None
     display_name = None
     template = None
