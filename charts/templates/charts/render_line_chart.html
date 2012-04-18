@@ -84,8 +84,8 @@ Include this css style this in your <head>
 		periodSelector{{div_id}}.periods = [
 		    {% for period in chart.PeriodSelector.periods %}
 		        {
-		            period: {{period.period}},
-		            label: {{period.label}}
+		            period: "{{period.period}}",
+		            label: "{{period.label}}"
 		            {% if period.count %},count: {{period.count}}{% endif %}
 		            {% if period.selected %},selected: true{% endif %}
 		        }{% if not forloop.last %},{% endif %}
