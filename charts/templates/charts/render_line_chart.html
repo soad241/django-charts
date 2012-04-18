@@ -89,7 +89,7 @@ Include this css style this in your <head>
 		// DATA SET SELECTOR
 		var dataSetSelector{{div_id}} = new AmCharts.DataSetSelector();
 		dataSetSelector{{div_id}}.position = "{{chart.dataset_selector_position}}";
-		chart.dataSetSelector = dataSetSelector{{div_id}};
+		chart{{div_id}}.dataSetSelector = dataSetSelector{{div_id}};
 
 		chart{{div_id}}.write('chartdiv{{div_id}}');
 	}
