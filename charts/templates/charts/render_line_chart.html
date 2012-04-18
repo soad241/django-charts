@@ -1,8 +1,4 @@
 {% load chart_tags %}
-<!--
-Include this css style this in your <head>
-<link rel="stylesheet" href="{{MEDIA_URL}}charts/amstocks/style.css" type="text/css">
--->
 <script type="text/javascript">
 {% with chart.get_datasets as datasets %}
 
@@ -20,7 +16,7 @@ Include this css style this in your <head>
 	
 	function createStockChart() {
 		chart{{div_id}} = new AmCharts.AmStockChart();
-		chart{{div_id}}.pathToImages = "{{MEDIA_URL}}charts/amstocks/images/";
+		chart{{div_id}}.pathToImages = "{{MEDIA_URL}}charts/images/";
 
         {% for dataset in datasets %}
             {% line_chart_dataset_detail chart dataset div_id forloop.counter %}

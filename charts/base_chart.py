@@ -34,6 +34,7 @@ class BaseChart(object):
 
     def render(self, **context):
         context['chart'] = self
+        context['MEDIA_URL'] = settings.MEDIA_URL
         context['div_id'] = randint(1,999999999)
         return render_to_string(self.template, context)
 
