@@ -2,13 +2,7 @@
 <script type="text/javascript">
     var chart{{div_id}};
 
-    var chartData{{div_id}} = [
-    {% for obj in chart.get_queryset %}
-        {
-            {% pie_chart_obj_info chart obj %}
-        }{% if not forloop.last %},{% endif %}
-    {% endfor %}
-    ];
+    var chartData{{div_id}} = {{chart.get_dataset_as_json|safe}};
 
     AmCharts.ready(function () {
         // PIE CHART

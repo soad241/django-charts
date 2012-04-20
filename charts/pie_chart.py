@@ -1,3 +1,5 @@
+import json
+
 from base_chart import BaseChart, ImproperlyConfigured, _
 
 class PieChart(BaseChart):
@@ -26,5 +28,13 @@ class PieChart(BaseChart):
                                      "'get_value'"))
 
     def get_color(self, obj):
-        raise ImproperlyConfigured(_("PieChart requires a definition of "
-                                     "'get_color'"))
+        return None
+
+    def get_dataset_as_json(self):
+        json_data = []
+        for obj in self.get_queryset():
+            json_data.append({'title': self.get_title(obj),
+                              'value': self.get_value(obj) or 0.0,
+                              'color': self.get_color(obj)})
+        return json.dumps(json_data)
+

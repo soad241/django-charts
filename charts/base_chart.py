@@ -32,6 +32,10 @@ class BaseChart(object):
         raise ImproperlyConfigured(_("Chart requires a definition of "
                                      "'get_queryset'"))
 
+    def get_dataset_as_json(self):
+        raise ImproperlyConfigured(_("Chart requires a definition of "
+                                     "'get_dataset_as_json'"))
+
     def render(self, **context):
         context['chart'] = self
         context['MEDIA_URL'] = settings.MEDIA_URL
