@@ -28,8 +28,8 @@
         {% endfor %}
 
 		chart{{div_id}}.dataSets = [
-		    {% for dataset in datasets %}
-		        dataSet{{div_id}}_{{forloop.counter}}{% if not forloop.last %},{% endif %}
+		    {% for dataset in chart.get_datasets %}
+		        dataSet{{div_id}}{{forloop.counter}}{% if not forloop.last %},{% endif %}
 		    {% endfor %}
 		];
 
