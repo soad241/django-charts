@@ -1,9 +1,7 @@
-import json
-
 from base_chart import BaseChart, ImproperlyConfigured, _
 
 def serialize_datetime(dt):
-    """ JSON serialize datetime, date or anything that behaves like them """
+    """ Serialize date, datetime and anything that behaves like them """
     pattern =\
         'new Date({year},{month},{day},{hour},{minute},{second},{microsecond})'
     return pattern.format(year=getattr(dt, 'year', 1990),
@@ -80,9 +78,9 @@ class LineChart(BaseChart):
         for dataset in self.get_datasets():
             dataset_data = []
             for obj in self.get_queryset(dataset):
-                dataset_data.append({
-                                'date': serialize_datetime(self.get_date(obj)),
-                                'value': self.get_value(obj) or 0.0})
-            json_data.append(json.dumps(dataset_data))
+                date = serialize_datetime(self.get_date(obj))
+                value = self.get_value(obj) or 0.0
+                dataset_data.append('{"date": %s, "value": %s}' % (date, value))
+            json_data.append('[%s]' % ', '.join(dataset_data))
         return json_data
 
