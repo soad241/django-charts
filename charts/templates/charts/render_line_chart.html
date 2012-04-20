@@ -22,9 +22,9 @@
                 fromField: "value",
                 toField: "value"
             }];
-            {% line_chart_dataset_info chart dataset div_id forloop.counter %}
+            dataSet{{div_id}}{{forloop.counter}}.title = "{% line_chart_get_title chart dataset %}";
+            dataSet{{div_id}}{{forloop.counter}}.color = "{% line_chart_get_color chart dataset %}";
             dataSet{{div_id}}{{forloop.counter}}.dataProvider = chartData{{div_id}}{{forloop.counter}};
-            {% line_chart_dataset_info chart dataset div_id forloop.counter %}
         {% endfor %}
 
 		chart{{div_id}}.dataSets = [
