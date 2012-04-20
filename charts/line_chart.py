@@ -80,7 +80,7 @@ class LineChart(BaseChart):
             for obj in self.get_queryset(dataset):
                 date = serialize_datetime(self.get_date(obj))
                 value = self.get_value(obj) or 0.0
-                dataset_data.append('{date: %s, value: %s}' % (date, value))
+                dataset_data.append('{"date": %s, "value": %s}' % (date, value))
             json_data.append('[%s]' % ', '.join(dataset_data))
         return json_data
 
