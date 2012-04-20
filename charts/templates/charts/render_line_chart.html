@@ -17,13 +17,13 @@
 
         {% for dataset in chart.get_datasets %}
             var dataSet{{div_id}}{{forloop.counter}} = new AmCharts.DataSet();
-            dataSet{{div_id}}{{idx}}.categoryField = "date";
-            dataSet{{div_id}}{{idx}}.fieldMappings = [{
+            dataSet{{div_id}}{{forloop.counter}}.categoryField = "date";
+            dataSet{{div_id}}{{forloop.counter}}.fieldMappings = [{
                 fromField: "value",
                 toField: "value"
             }];
             {% line_chart_dataset_info chart dataset div_id forloop.counter %}
-            dataSet{{div_id}}{{idx}}.dataProvider = chartData{{div_id}}{{idx}};
+            dataSet{{div_id}}{{forloop.counter}}.dataProvider = chartData{{div_id}}{{forloop.counter}};
             {% line_chart_dataset_info chart dataset div_id forloop.counter %}
         {% endfor %}
 
