@@ -2,13 +2,6 @@ from django import template
 
 register = template.Library()
 
-@register.filter
-def jsfloatformat(value):
-    try:
-        return str(float(value)).replace(',', '.')
-    except ValueError:
-        return value
-
 @register.inclusion_tag('charts/xy_chart_obj_info.html')
 def xy_chart_obj_info(chart, obj, selected=False):
     return {'label_text': chart.get_label_text(obj),

@@ -24,7 +24,7 @@
             }];
             {% line_chart_dataset_info chart dataset div_id forloop.counter %}
             dataSet{{div_id}}{{idx}}.dataProvider = chartData{{div_id}}{{idx}};
-            {% line_chart_dataset_detail chart dataset div_id forloop.counter %}
+            {% line_chart_dataset_info chart dataset div_id forloop.counter %}
         {% endfor %}
 
 		chart{{div_id}}.dataSets = [
