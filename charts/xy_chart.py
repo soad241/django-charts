@@ -43,3 +43,13 @@ class XYChart(BaseChart):
         raise ImproperlyConfigured(_("XYChart requires a definition of "
                                      "'get_text_color'"))        
 
+    def get_dataset_as_json(self):
+        json_data = []
+        idx = 1
+        for obj in self.get_queryset():
+            x, y = self.get_xy_values(obj)
+            json_data.append({'x%i' % idx: x or 0.0,
+                              'y%i' % idx: y or 0.0})
+            idx += 1
+        return json.dumps(json_data)
+
