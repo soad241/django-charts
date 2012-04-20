@@ -1,6 +1,2 @@
-{% load chart_tags %}
-{% for obj in queryset %}
-    {
-        {% line_chart_obj_info chart obj %}
-    }{% if not forloop.last %},{% endif %}
-{% endfor %}
+dataSet{{div_id}}{{idx}}.title = "{{title}}";
+dataSet{{div_id}}{{idx}}.color = "{{color}}";

@@ -1,6 +1,5 @@
 {% load chart_tags %}
 <script type="text/javascript">
-{% with chart.get_datasets as datasets %}
 
 	AmCharts.ready(function () {
 		createStockChart();
@@ -8,17 +7,23 @@
 
 	var chart{{div_id}};
 	
-	{% for dataset in datasets %}
-    	var chartData{{div_id}}_{{forloop.counter}} = [
-            {% line_chart_dataset_info chart dataset %}
-        ];
+	{% for dataset in chart.get_dataset_as_json %}
+    	var chartData{{div_id}}{{forloop.counter}} = {{dataset|safe}};
     {% endfor %}
 	
 	function createStockChart() {
 		chart{{div_id}} = new AmCharts.AmStockChart();
 		chart{{div_id}}.pathToImages = "{{MEDIA_URL}}charts/images/";
 
-        {% for dataset in datasets %}
+        {% for dataset in chart.get_datasets %}
+            var dataSet{{div_id}}{{forloop.counter}} = new AmCharts.DataSet();
+            dataSet{{div_id}}{{idx}}.categoryField = "date";
+            dataSet{{div_id}}{{idx}}.fieldMappings = [{
+                fromField: "value",
+                toField: "value"
+            }];
+            {% line_chart_dataset_info chart dataset div_id forloop.counter %}
+            dataSet{{div_id}}{{idx}}.dataProvider = chartData{{div_id}}{{idx}};
             {% line_chart_dataset_detail chart dataset div_id forloop.counter %}
         {% endfor %}
 
@@ -89,8 +94,6 @@
 
 		chart{{div_id}}.write('chartdiv{{div_id}}');
 	}
-
-{% endwith %}
 </script>
 
 <div id="chartdiv{{div_id}}" style="width:{{chart.width}}px; height:{{chart.height}}px;"></div>
