@@ -45,7 +45,7 @@
                 graph.bullet = "{{chart.bullet_shape}}";
                 graph.bulletSize = {{chart.bullet_size}};
                 {% xy_chart_obj_info chart obj %}
-            {% endif %}
+            {% endifequal %}
             chart{{div_id}}.addGraph(graph);
         {% endfor %}
         {% endwith %}
