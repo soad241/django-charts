@@ -1,3 +1,5 @@
+import json
+
 from base_chart import BaseChart, ImproperlyConfigured, _
 
 class XYChart(BaseChart):
