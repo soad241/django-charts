@@ -41,13 +41,13 @@
             {% ifequal obj selected_obj %}
                 graph.bullet = "{{chart.selected_bullet_shape}}";
                 graph.bulletSize = {{chart.selected_bullet_size}};
-                graph.lineColor = "{% xy_chart_get_text_color chart obj 1 %}";
-                graph.color = "{% xy_chart_get_color chart obj 1 %}";
+                graph.lineColor = "{% xy_chart_get_color chart obj 1 %}";
+                graph.color = "{% xy_chart_get_text_color chart obj 1 %}";
             {% else %}
                 graph.bullet = "{{chart.bullet_shape}}";
                 graph.bulletSize = {{chart.bullet_size}};
-                graph.lineColor = "{% xy_chart_get_text_color chart obj %}";
-                graph.color = "{% xy_chart_get_color chart obj %}";
+                graph.lineColor = "{% xy_chart_get_color chart obj %}";
+                graph.color = "{% xy_chart_get_text_color chart obj %}";
             {% endifequal %}
             chart{{div_id}}.addGraph(graph);
         {% endfor %}
