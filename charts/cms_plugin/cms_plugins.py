@@ -20,10 +20,7 @@ class ChartPlugin(CMSPluginBase):
         return context
 
     class Media:
-        css = {
-            'extra': ('charts/style.css',)
-        }
-        js = ('charts/amstock.js',
-              'charts/raphael.js')
+        css = {'extra': ('charts/style.css',)}
+        js = ('charts/amstock.js',)
 
 plugin_pool.register_plugin(ChartPlugin)
