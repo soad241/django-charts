@@ -88,9 +88,11 @@
 		chart{{div_id}}.periodSelector = periodSelector{{div_id}};
 
 		// DATA SET SELECTOR
-		var dataSetSelector{{div_id}} = new AmCharts.DataSetSelector();
-		dataSetSelector{{div_id}}.position = "{{chart.dataset_selector_position}}";
-		chart{{div_id}}.dataSetSelector = dataSetSelector{{div_id}};
+		{% if chart.has_data_selector %}
+    		var dataSetSelector{{div_id}} = new AmCharts.DataSetSelector();
+	    	dataSetSelector{{div_id}}.position = "{{chart.dataset_selector_position}}";
+	    	chart{{div_id}}.dataSetSelector = dataSetSelector{{div_id}};
+        {% endif %}
 
 		chart{{div_id}}.write('chartdiv{{div_id}}');
 	}
