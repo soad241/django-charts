@@ -68,24 +68,26 @@
 
 
 		// PERIOD SELECTOR ///////////////////////////////////
-		var periodSelector{{div_id}} = new AmCharts.PeriodSelector();
-		periodSelector{{div_id}}.position = "{{chart.PeriodSelector.position}}";
-		periodSelector{{div_id}}.dateFormat = "{{chart.PeriodSelector.date_format}}";
-		periodSelector{{div_id}}.inputFieldsEnabled = {{chart.PeriodSelector.input_fields_enabled|yesno:'true,false'}};
-		periodSelector{{div_id}}.fromText = "{{chart.PeriodSelector.from_text}}";
-		periodSelector{{div_id}}.toText = "{{chart.PeriodSelector.to_text}}";
-		periodSelector{{div_id}}.periodsText = "{{chart.PeriodSelector.periods_text}}";
-		periodSelector{{div_id}}.periods = [
-		    {% for period in chart.PeriodSelector.periods %}
-		        {
-		            period: "{{period.period}}",
-		            label: "{{period.label}}"
-		            {% if period.count %},count: {{period.count}}{% endif %}
-		            {% if period.selected %},selected: true{% endif %}
-		        }{% if not forloop.last %},{% endif %}
-		    {% endfor %}
-		];
-		chart{{div_id}}.periodSelector = periodSelector{{div_id}};
+		{% if has_period_selector %}
+		    var periodSelector{{div_id}} = new AmCharts.PeriodSelector();
+		    periodSelector{{div_id}}.position = "{{chart.PeriodSelector.position}}";
+		    periodSelector{{div_id}}.dateFormat = "{{chart.PeriodSelector.date_format}}";
+		    periodSelector{{div_id}}.inputFieldsEnabled = {{chart.PeriodSelector.input_fields_enabled|yesno:'true,false'}};
+		    periodSelector{{div_id}}.fromText = "{{chart.PeriodSelector.from_text}}";
+		    periodSelector{{div_id}}.toText = "{{chart.PeriodSelector.to_text}}";
+		    periodSelector{{div_id}}.periodsText = "{{chart.PeriodSelector.periods_text}}";
+		    periodSelector{{div_id}}.periods = [
+		        {% for period in chart.PeriodSelector.periods %}
+		            {
+		                period: "{{period.period}}",
+		                label: "{{period.label}}"
+		                {% if period.count %},count: {{period.count}}{% endif %}
+		                {% if period.selected %},selected: true{% endif %}
+		            }{% if not forloop.last %},{% endif %}
+		        {% endfor %}
+		    ];
+		    chart{{div_id}}.periodSelector = periodSelector{{div_id}};
+        {% endif %}
 
 		// DATA SET SELECTOR
 		{% if chart.has_data_selector %}

@@ -34,6 +34,7 @@ class LineChart(BaseChart):
     equal_spacing = True
     max_series = 5000
 
+    has_period_selector = True
     has_data_selector = False
     dataset_selector_position = 'left'
 
